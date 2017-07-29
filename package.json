@@ -1,0 +1,25 @@
+{
+  "name": "src",
+  "version": "1.0.0",
+  "description": "FreeCodeCamp client files",
+  "main": "",
+  "scripts": {
+    "dll": "webpack --config=webpack.dll.js -p",
+    "dev": "npm run dll && webpack -d --watch",
+    "build": "webpack -p"
+  },
+  "author": "Jérémie van der Sande",
+  "license": "ISC",
+  "dependencies": {
+    "styled-components": "^1.4.5",
+    "webpack": "^2.4.1",
+    "babel-core": "^6.24.1",
+    "babel-loader": "^6.4.1",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-react": "^6.24.1",
+    "babel-preset-stage-2": "^6.24.1",
+    "react": "^15.5.4",
+    "react-dom": "^15.5.4"
+  },
+  "devDependencies": {}
+}
