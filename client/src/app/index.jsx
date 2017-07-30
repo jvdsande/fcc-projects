@@ -51,6 +51,7 @@ let fccAchievements = [
 
 class Achievement extends React.Component {
   render() {
+    console.log(window.location.href+this.props.href)
     return (
       <AchievementLink href={window.location.href+this.props.href}>
         <Title>{this.props.title}</Title>
