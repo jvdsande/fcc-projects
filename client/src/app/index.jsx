@@ -2,7 +2,7 @@ import React from 'react'
 import {
   Link, Title,
   Nav, Section,
-  Preview,
+  Preview, NoClick,
   LinkedIn,
 } from './styles'
 
@@ -16,7 +16,7 @@ let personalAchievements = [
 let fccAchievements = [
   {
     title: "Calculator",
-    href: "http://jeremie-vds.com/fcc/calculator",
+    href: "fcc/calculator",
     style: {
       transform: "scale(0.1)"
     }
@@ -55,6 +55,7 @@ class Achievement extends React.Component {
       <Link href={this.props.href} className="achievement">
         <Title>{this.props.title}</Title>
         <Preview scrolling="no" src={this.props.href} />
+        <NoClick />
       </Link>
     )
   }

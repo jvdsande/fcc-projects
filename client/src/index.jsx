@@ -70,8 +70,8 @@ injectGlobal `
   .achievement {
     position: relative;
     display: block;
-    width: 420px;
-    height: 320px;
+    width: 384px;
+    height: 260px;
     margin-bottom: 16px;
     background: white;
     border-radius: 4px;
@@ -97,10 +97,10 @@ injectGlobal `
     display: none;
   }
 
-  
+
   .achievement-hidden {
     display: block;
-    width: 420px;
+    width: 384px;
     height: 0px;
   }
 

@@ -66,18 +66,16 @@ export const Preview = styled.iframe`
   height: 1080;
   border: none;
   position: relative;
-
-  &:after {
-    content: "";
-    display: block;
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: red;
-    z-index: 100;
-  }
+  margin-top: 44px;
+`
+export const NoClick = styled.div`
+  display: block;
+  position: absolute;
+  top: 44px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0,0,0,0);
 `
 
 
