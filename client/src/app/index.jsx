@@ -51,11 +51,15 @@ let fccAchievements = [
 
 class Achievement extends React.Component {
   render() {
-    console.log(window.location.href+this.props.href)
+    let href = window.location.href
+    href = href.split('/')
+    href.pop()
+    href.push('')
+    href = href.join('/')
     return (
-      <AchievementLink href={window.location.href+this.props.href}>
+      <AchievementLink href={href+this.props.href}>
         <Title>{this.props.title}</Title>
-        <Preview scrolling="no" src={window.location.href+this.props.href} />
+        <Preview scrolling="no" src={href+this.props.href} />
         <NoClick />
       </AchievementLink>
     )
