@@ -12,38 +12,38 @@ import {
 let personalAchievements = [
   {
     title: "React Pie Charts",
-    href: "piechart"
+    href: "piechart/"
   }
 ]
 
 let fccAchievements = [
   {
     title: "Calculator",
-    href: "fcc/calculator"
+    href: "fcc/calculator/"
   },
   {
     title: "Pomodoro",
-    href: "fcc/pomodoro"
+    href: "fcc/pomodoro/"
   },
   {
     title: "Quote Machine",
-    href: "fcc/quote"
+    href: "fcc/quote/"
   },
   {
     title: "Tic Tac Toe",
-    href: "fcc/tictactoe"
+    href: "fcc/tictactoe/"
   },
   {
     title: "Tribute Page",
-    href: "fcc/tribute"
+    href: "fcc/tribute/"
   },
   {
     title: "Twitch",
-    href: "fcc/twitch"
+    href: "fcc/twitch/"
   },
   {
     title: "Weather",
-    href: "fcc/weather"
+    href: "fcc/weather/"
   }
 ]
 
