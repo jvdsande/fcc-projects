@@ -1,2 +1,6 @@
+client/node_modules
+client/vendor.json
 node_modules
+package.json
+package-lock.json
 vendor.json
