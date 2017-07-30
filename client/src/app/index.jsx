@@ -1,49 +1,49 @@
 import React from 'react'
 import {
+  PortfolioBody,
   Link, Title,
   Nav, Section,
+  Achievements, AchievementLink, AchievementHidden,
   Preview, NoClick,
   LinkedIn,
+  Footer,
 } from './styles'
 
 let personalAchievements = [
   {
     title: "React Pie Charts",
-    href: "http://jeremie-vds.com/piechart"
+    href: "piechart"
   }
 ]
 
 let fccAchievements = [
   {
     title: "Calculator",
-    href: "fcc/calculator",
-    style: {
-      transform: "scale(0.1)"
-    }
+    href: "fcc/calculator"
   },
   {
     title: "Pomodoro",
-    href: "http://jeremie-vds.com/fcc/pomodoro"
+    href: "fcc/pomodoro"
   },
   {
     title: "Quote Machine",
-    href: "http://jeremie-vds.com/fcc/quote"
+    href: "fcc/quote"
   },
   {
     title: "Tic Tac Toe",
-    href: "http://jeremie-vds.com/fcc/tictactoe"
+    href: "fcc/tictactoe"
   },
   {
     title: "Tribute Page",
-    href: "http://jeremie-vds.com/fcc/tribute"
+    href: "fcc/tribute"
   },
   {
     title: "Twitch",
-    href: "http://jeremie-vds.com/fcc/twitch"
+    href: "fcc/twitch"
   },
   {
     title: "Weather",
-    href: "http://jeremie-vds.com/fcc/weather"
+    href: "fcc/weather"
   }
 ]
 
@@ -52,11 +52,11 @@ let fccAchievements = [
 class Achievement extends React.Component {
   render() {
     return (
-      <Link href={this.props.href} className="achievement">
+      <AchievementLink href={window.location.origin+'/'+this.props.href}>
         <Title>{this.props.title}</Title>
         <Preview scrolling="no" src={this.props.href} />
         <NoClick />
-      </Link>
+      </AchievementLink>
     )
   }
 }
@@ -69,7 +69,7 @@ export class Portfolio extends React.Component
   }
   render() {
     return (
-      <div id="portfolio">
+      <PortfolioBody>
         <Nav>
           <Section href="#about_me">
             About Me
@@ -107,7 +107,7 @@ export class Portfolio extends React.Component
         <br />
         <h3 id="fcc_projects">FreeCodeCamp projects</h3>
         <p>Below is a list of the various projects executed during my FreeCodeCamp certification.</p>
-        <div className="achievements">
+        <Achievements>
           {
             fccAchievements.map(function(a) {
               return (
@@ -116,15 +116,15 @@ export class Portfolio extends React.Component
               )
             })
           }
-          <div className="achievement-hidden"></div>
-          <div className="achievement-hidden"></div>
-          <div className="achievement-hidden"></div>
-        </div>
+          <AchievementHidden />
+          <AchievementHidden />
+          <AchievementHidden />
+        </Achievements>
 
         <br />
         <h3 id="o_projects">Other projects</h3>
         <p>Here are other open-source projects that I've been developing in my free time.</p>
-        <div className="achievements">
+        <Achievements>
           {
             personalAchievements.map(function(a) {
               return (
@@ -133,16 +133,16 @@ export class Portfolio extends React.Component
               )
             })
           }
-          <div className="achievement-hidden"></div>
-          <div className="achievement-hidden"></div>
-          <div className="achievement-hidden"></div>
-        </div>
+          <AchievementHidden />
+          <AchievementHidden />
+          <AchievementHidden />
+        </Achievements>
 
 
-        <footer>
+        <Footer>
           <LinkedIn href="https://www.linkedin.com/in/jeremievds/" />
-        </footer>
-      </div>
+        </Footer>
+      </PortfolioBody>
     )
   }
 }
