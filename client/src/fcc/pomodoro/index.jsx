@@ -39,7 +39,7 @@ const Decrease = styled.button`
   width: 56px;
   height: 56px;
   border-radius: 56px;
-  background: rgba(255,255,255,0.6);
+  background: rgba(255,255,255,${props => props.disabled?0.2:0.6});
   font-size: 110%;
   cursor: pointer;
   font-weight: bold;
@@ -47,7 +47,7 @@ const Decrease = styled.button`
     outline: 0 !important;
   }
   &:hover {
-    background: rgba(255,255,255,0.9);
+    background: rgba(255,255,255,${props => props.disabled?0.2:0.9});
   }
 `
 const Increase = styled(Decrease)`
@@ -316,9 +316,6 @@ class Pomodoro extends Component {
   breakUpdate = (value) => {
     let currentTime = this.state.currentTime
     let breakTime = value
-    if(this.state.currentStep == STEP_INIT) {
-      currentTime = breakTime * 60
-    }
     this.setState({breakTime, currentTime})
   }
 
