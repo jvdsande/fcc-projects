@@ -15,6 +15,7 @@ const PomodoroBody = styled.div`
 
 
 const NumberSelectBody = styled.div`
+  position: relative;
   margin: 24px;
   text-align: center;
   font-size: 150%;
@@ -45,6 +46,9 @@ const Decrease = styled.button`
   &:active, &:focus {
     outline: 0 !important;
   }
+  &:hover {
+    background: rgba(255,255,255,0.9);
+  }
 `
 const Increase = styled(Decrease)`
 `
@@ -59,6 +63,28 @@ const NumberTitle = styled.div`
   font-size: 120%;
   text-align: center;
   margin-bottom: 12px;
+  color: #FAFAFA;
+  text-shadow: 0 0 8px #9E9E9E;
+  opacity: 0.8;
+`
+
+const Reset = styled.div`
+  background-image: url('./reset.png');
+  background-position: center center;
+  background-size: cover;
+  filter: invert(95%);
+  opacity: 0.5;
+  &:hover {
+    opacity: 0.8;
+  }
+  width: 160px;
+  height: 160px;
+  margin-top: -24px;
+  position: relative;
+  display: ${props => props.show?'inline-block':'none'}
+`
+const ResetPlacer = styled(Reset)`
+  background: none
 `
 
 const ClockBody = styled.div`
@@ -66,11 +92,11 @@ const ClockBody = styled.div`
   font-weight: bold;
   text-shadow: 0 0 8px #9E9E9E;
   position: absolute;
-  left: calc(50% - 320px);
-  width: 640px;
+  left: 0;
+  width: 100%;
   text-align: center;
-  top: calc(50% - 160px);
-  height: 320px;
+  top: 0;
+  height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -130,6 +156,14 @@ class Background extends Component {
     }
 
     const colors = [
+      [ // Grey
+        '#78909C',
+        '#607D8B',
+        '#546E7A',
+        '#455A64',
+        '#37474F',
+       '#263238'
+     ],
       [ // Green
         '#66BB6A',
         '#4CAF50',
@@ -204,9 +238,9 @@ class NumberSelect extends Component {
       <NumberSelectBody>
         {this.props.title?(<NumberTitle>{this.props.title}</NumberTitle>):''}
         <NumberSelectMain>
-          <Decrease onClick={this.decrease} disabled={this.props.disabled}> - </Decrease>
+          <Decrease onClick={this.decrease} disabled={this.props.value == this.props.min}> - </Decrease>
           <Value>{this.props.value}</Value>
-          <Increase onClick={this.increase} disabled={this.props.disabled}> + </Increase>
+          <Increase onClick={this.increase} disabled={this.props.value == this.props.max}> + </Increase>
         </NumberSelectMain>
       </NumberSelectBody>
     )
@@ -219,6 +253,13 @@ class Clock extends Component {
     super()
 
     this.timer = null
+  }
+
+  reset = (event) => {
+    event.stopPropagation()
+    event.preventDefault()
+    if(this.props.reset)
+      this.props.reset()
   }
 
   render() {
@@ -238,14 +279,17 @@ class Clock extends Component {
 
     return (
       <ClockBody onClick={this.props.onClick}>
+        <ResetPlacer show={this.props.showReset} />
         {pad(minutes)}:{pad(seconds)}
+        <Reset show={this.props.showReset} onClick={this.reset}/>
       </ClockBody>
     )
   }
 }
 
-const STEP_BREAK = 0
-const STEP_SESSION = 1
+const STEP_INIT = 0
+const STEP_BREAK = 1
+const STEP_SESSION = 2
 
 class Pomodoro extends Component {
   constructor() {
@@ -255,15 +299,15 @@ class Pomodoro extends Component {
       sessionTime: 25,
       breakTime: 5,
       currentTime: 25 * 60,
-      currentStep: STEP_SESSION,
+      currentStep: STEP_INIT,
       running: false,
     }
   }
 
   sessionUpdate = (value) => {
     let currentTime = this.state.currentTime
-    let sessionTime = value <= 60 ? (value > 0 ? value : 1) : 60
-    if(this.state.currentStep == STEP_SESSION) {
+    let sessionTime = value
+    if(this.state.currentStep == STEP_INIT) {
       currentTime = sessionTime * 60
     }
     this.setState({sessionTime, currentTime})
@@ -271,8 +315,8 @@ class Pomodoro extends Component {
 
   breakUpdate = (value) => {
     let currentTime = this.state.currentTime
-    let breakTime = value <= 60 ? (value > 0 ? value : 1) : 60
-    if(this.state.currentStep == STEP_BREAK) {
+    let breakTime = value
+    if(this.state.currentStep == STEP_INIT) {
       currentTime = breakTime * 60
     }
     this.setState({breakTime, currentTime})
@@ -283,11 +327,12 @@ class Pomodoro extends Component {
     let currentStep = this.state.currentStep
 
     if(currentTime < 0) {
-      currentStep = (currentStep + 1)%2
-      if(currentStep == STEP_SESSION) {
+      if(currentStep == STEP_BREAK) {
+        currentStep = STEP_SESSION
         currentTime = 60 * this.state.sessionTime
       }
       else {
+        currentStep = STEP_BREAK
         currentTime = 60 * this.state.breakTime
       }
     }
@@ -296,20 +341,31 @@ class Pomodoro extends Component {
   }
 
   toggle = () => {
-    this.setState({running: !this.state.running})
+    let currentStep = this.state.currentStep
+    if(!this.state.running && currentStep == STEP_INIT)
+      currentStep = STEP_SESSION
+
+    this.setState({running: !this.state.running, currentStep})
   }
 
+  reset = () => {
+    this.setState({currentStep: STEP_INIT, currentTime: 60 * this.state.sessionTime, running: false})
+  }
 
-  render() {return (
+  render() {
+    return (
       <PomodoroBody>
         <Background color={this.state.currentStep} />
-        <NumberSelect title="Session Length" onChange={this.sessionUpdate} value={this.state.sessionTime} disabled={this.state.running} />
         <Clock  time={this.state.currentTime}
-                totalTime={this.state.currentStep == STEP_SESSION ? this.state.sessionTime : this.state.breakTime}
+                totalTime={this.state.currentStep == STEP_BREAK ? this.state.breakTime : this.state.sessionTime}
                 onTick={this.tickUpdate}
                 onClick={this.toggle}
-                disabled={!this.state.running} />
-        <NumberSelect title="Break Length" onChange={this.breakUpdate} value={this.state.breakTime} disabled={this.state.running} />
+                disabled={!this.state.running}
+                showReset={!this.state.running && this.state.currentStep != STEP_INIT}
+                reset={this.reset}
+              />
+        <NumberSelect title="Session Length" onChange={this.sessionUpdate} value={this.state.sessionTime} disabled={this.state.running} max={60} min={1}/>
+        <NumberSelect title="Break Length" onChange={this.breakUpdate} value={this.state.breakTime} disabled={this.state.running} max={60} min={1}/>
       </PomodoroBody>
     )
   }
