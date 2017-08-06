@@ -88,7 +88,7 @@ const ResetPlacer = styled(Reset)`
 `
 
 const ClockBody = styled.div`
-  font-size: 1000%;
+  font-size: 22vmin;
   font-weight: bold;
   text-shadow: 0 0 8px #9E9E9E;
   position: absolute;
