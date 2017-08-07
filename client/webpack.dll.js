@@ -11,6 +11,7 @@ module.exports = {
      'react',
      'react-dom',
      'styled-components',
+     'react-scrollable-anchor',
     ]
   },
 

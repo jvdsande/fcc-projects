@@ -78,10 +78,10 @@ export const PortfolioBody = styled.div`
 
 /* Achievements       */
 export const Preview = styled.embed`
-  transform: scale(0.2);
+  transform: scale(0.3);
   transform-origin: 0 0;
-  width: 1920;
-  height: 1080;
+  width: 1280;
+  height: 720;
   border: none;
   position: relative;
   margin-top: 44px;

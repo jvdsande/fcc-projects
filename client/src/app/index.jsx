@@ -1,4 +1,5 @@
 import React from 'react'
+import ScrollableAnchor from 'react-scrollable-anchor'
 import {
   PortfolioBody,
   Link, Title,
@@ -82,7 +83,7 @@ export class Portfolio extends React.Component
           <Section href="#fcc_projects">
             FreeCodeCamp Projects
           </Section>
-          <Section href="#o_projects">
+          <Section href="#other_projects">
             Personal Projects
           </Section>
         </Nav>
@@ -91,7 +92,9 @@ export class Portfolio extends React.Component
         </Title>
         <h2>Self-taught programmer & Web developer</h2>
         <br />
-        <h3 id="about_me">About me</h3>
+        <ScrollableAnchor id='about_me'>
+          <h3>About me</h3>
+        </ScrollableAnchor>
         <p>
           Started coding at the age of 12 in Ruby, using the game development software <Link href="http://www.rpgmakerweb.com/products/programs/rpg-maker-xp">RPG Maker XP</Link>.
           Never stopped since, and taught myself how to use C++ and Java.
@@ -110,7 +113,9 @@ export class Portfolio extends React.Component
           I recently decided to officialize my Web development skills by following <Link href="http://freecodecamp.com/">FreeCodeCamp</Link> formation and getting my frontend and backend certifications.
         </p>
         <br />
-        <h3 id="fcc_projects">FreeCodeCamp projects</h3>
+        <ScrollableAnchor id='fcc_projects'>
+          <h3>FreeCodeCamp projects</h3>
+        </ScrollableAnchor>
         <p>Below is a list of the various projects executed during my FreeCodeCamp certification.</p>
         <Achievements>
           {
@@ -127,7 +132,9 @@ export class Portfolio extends React.Component
         </Achievements>
 
         <br />
-        <h3 id="o_projects">Other projects</h3>
+        <ScrollableAnchor id='other_projects'>
+          <h3>Other projects</h3>
+        </ScrollableAnchor>
         <p>Here are other open-source projects that I've been developing in my free time.</p>
         <Achievements>
           {

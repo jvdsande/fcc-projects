@@ -79,7 +79,6 @@ const Reset = styled.div`
   }
   width: 160px;
   height: 160px;
-  margin-top: -24px;
   position: relative;
   display: ${props => props.show?'inline-block':'none'}
 `
