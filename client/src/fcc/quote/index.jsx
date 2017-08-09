@@ -142,7 +142,12 @@ class Quote extends Component {
 
   getNextQuote = () => {
     get.concat('https://quotesondesign.com/wp-json/posts?filter[orderby]=rand&filter[posts_per_page]=1&timestamp='+( new Date().getTime()), function(err, res, data) {
-      let obj = JSON.parse(data)[0]
+      let obj = ''
+      try {
+        obj = JSON.parse(data)[0]
+      } catch(err) {
+        obj = {content: 'An error occured', author: ''}
+      }
       let quote = entities.decode(obj.content)
       let author = entities.decode(obj.title)
 
