@@ -31,6 +31,10 @@ let fccAchievements = [
     href: "fcc/quote/"
   },
   {
+    title: "Simon's Game",
+    href: "fcc/simon/"
+  },
+  {
     title: "Tic Tac Toe",
     href: "fcc/tictactoe/"
   },
@@ -45,6 +49,10 @@ let fccAchievements = [
   {
     title: "Weather",
     href: "fcc/weather/"
+  },
+  {
+    title: "Wikipedia Viewer",
+    href: "fcc/wikipedia/"
   }
 ]
 

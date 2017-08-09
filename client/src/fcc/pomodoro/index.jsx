@@ -369,7 +369,7 @@ class Pomodoro extends Component {
 
 
 let target = document.getElementById('root')
-ReactDOM.render(<Pomodoro>Pomodoro</Pomodoro>, target)
+ReactDOM.render(<Pomodoro />, target)
 
 
 injectGlobal`
