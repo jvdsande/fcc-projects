@@ -7,7 +7,7 @@ export const Link = styled.a`
   position: relative;
 
   &:visited {
-  color: #1976D2;
+    color: #1976D2;
   }
 `
 

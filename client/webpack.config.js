@@ -12,6 +12,7 @@ var config = {
     'fcc/calculator/':  APP_DIR + '/fcc/calculator/index.jsx',
     'fcc/pomodoro/':    APP_DIR + '/fcc/pomodoro/index.jsx',
     'fcc/quote/':       APP_DIR + '/fcc/quote/index.jsx',
+    'fcc/simon/':       APP_DIR + '/fcc/simon/index.jsx',
     'fcc/tictactoe/':   APP_DIR + '/fcc/tictactoe/index.jsx',
     'fcc/tribute/':     APP_DIR + '/fcc/tribute/index.jsx',
     'fcc/twitch/':      APP_DIR + '/fcc/twitch/index.jsx',

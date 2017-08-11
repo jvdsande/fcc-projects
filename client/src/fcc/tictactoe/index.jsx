@@ -1,7 +1,13 @@
 import React, {Component} from 'react'
 import ReactDOM from 'react-dom'
 
-import styled, {injectGlobal} from 'styled-components'
+import {
+  BoardBackground, BoardBody, Cell,
+  Title, TitleTic, TitleToe,
+  Score, Wins,
+  OptionsToggle, OptionsBody, OptionList,
+  OptionPlayer, OptionOpponent, OptionTitle,
+} from './styles'
 
 const winningLines = [
   [0, 1, 2], [3, 4, 5], [6, 7, 8],
@@ -74,182 +80,6 @@ class Board {
     return winner
   }
 }
-
-const BoardBackground = styled.div`
-  position: absolute;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
-  background-color: ${props => {
-    switch(props.winner) {
-      case 'x': return '#FFE082'
-      case 'o': return '#B39DDB'
-      case 'draw' : return '#E0E0E0'
-      default:  return 'white'
-    }
-  }};
-  transition: all .5s
-`
-
-const Title = styled.div`
-  font-family: 'Gloria Hallelujah', cursive;
-  position: absolute;
-  top: 2vmin;
-  left: 0;
-  right: 0;
-  font-size: 15vmin;
-  text-align: center;
-  color: #F5F5F5;
-`
-const TitleTic = styled.span`
-  color: #FFF8E1;
-`
-const TitleToe = styled.span`
-  color: #EDE7F6;
-`
-
-const Score = styled.div`
-  font-family: 'Gloria Hallelujah', cursive;
-  position: absolute;
-  bottom: 2vmin;
-  left: 0;
-  right: 0;
-  font-size: 10vmin;
-  text-align: center;
-  color: #BDBDBD;
-`
-const Wins = styled.span`
-  color: ${props => props.player == 'x' ? '#FF8F00' : '#4527A0'};
-`
-
-const OptionsToggle = styled.div`
-  font-family: 'Gloria Hallelujah', cursive;
-  text-align: center;
-  color: #757575;
-  position: absolute;
-  bottom: calc(50% - 210px);
-  right: calc(50% - 160px);
-  height: 36px;
-  width: 106px;
-  background: #EEEEEE;
-  border-radius: 36px;
-  cursor: pointer;
-  &:hover {
-    background: #757575;
-    color: #EEEEEE;
-  }
-`
-
-const OptionsBody = styled.div`
-  position: absolute;
-  bottom: calc(50% - ${props => props.collapsed? '210px' : '165px'});
-  right: calc(50% - 160px);
-  width: ${props => props.collapsed? '106px' : '330px'};
-  height: ${props => props.collapsed? '36px' : '330px'};
-  border-radius: 50px;
-  padding: 0;
-  margin: 0;
-  background: #EEEEEE;
-  transition: all .3s;
-  overflow: hidden;
-`
-
-const OptionTitle = styled.div`
-  font-family: 'Gloria Hallelujah', cursive;
-  color: #757575;
-  width: 100%;
-  font-size: 30px;
-  text-align: center;
-  margin: 10px 0;
-`
-
-const OptionList = styled.div`
-  display: flex;
-  flex-direction: row;
-  width: 100%;
-  align-items: center;
-  justify-content: space-around;
-`
-
-const OptionPlayer = styled.div`
-  display: inline-block;
-  width: ${props => props.value == props.player ? '65px' : '45px'};
-  height: ${props => props.value == props.player ? '65px' : '45px'};
-  margin: ${props => props.value == props.player ? '0' : '10px'} 0;
-  border-radius: 100%;
-  background: ${props => props.value == 'x' ? '#FF8F00' : '#4527A0'};
-  opacity: ${props => props.value == props.player ? 1 : 0.3};
-  cursor: pointer;
-
-  &:hover {
-    opacity: ${props => props.value == props.player ? 1 : 0.7};
-  }
-`
-
-const OptionOpponent = styled.div`
-  display: inline-block;
-  width: ${props => props.value == props.mode ? '75px' : '65px'};
-  height: ${props => props.value == props.mode ? '75px' : '65px'};
-  margin: ${props => props.value == props.player ? '0' : '5px'} 0;
-  border-radius: 100%;
-  background-color:  ${props => props.value == props.mode ? '#BDBDBD' : 'transparent'};
-  background-image: url('./${props => props.value}.png');
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center;
-  cursor: pointer;
-
-  &:hover {
-    background-color: ${props => props.value == props.mode ? '#BDBDBD' : '#E0E0E0'};
-  }
-`
-
-const BoardBody = styled.div`
-  position: absolute;
-  top: calc(50% - 165px);
-  left: calc(50% - 165px);
-  width: 330px;
-  height: 330px;
-`
-
-const Cell = styled.div`
-  display: inline-block;
-  width: 110px;
-  height: 110px;
-  box-sizing: border-box;
-  border-radius: 100%;
-  border: 7px solid ${props => {
-    switch(props.winner) {
-      case 'x': return '#FFE082'
-      case 'o': return '#B39DDB'
-      case 'draw' : return '#E0E0E0'
-      default:  return 'white'
-    }
-  }};
-  background-color: ${props => {
-    switch(props.player) {
-      case 'x': return '#FF8F00'
-      case 'o': return '#4527A0'
-      default:  return '#EEEEEE'
-    }
-  }};
-  cursor: pointer;
-  transition: all .5s;
-
-  &:hover {
-    background-color: ${props => {
-      switch(props.player) {
-        case 'x': return '#FF8F00'
-        case 'o': return '#4527A0'
-      }
-      switch(props.turn) {
-        case 'x': return '#FFE082'
-        case 'o': return '#B39DDB'
-      }
-    }};
-  }
-`
 
 function computerNextPlay(board, computer)
 {
@@ -325,6 +155,7 @@ class TicTacToe extends Component {
     this.state = {
       turn: 'x',
       wins: {x: 0, o: 0},
+      freeze: false,
       options: {
         collapsed: false,
         player: '',
@@ -346,16 +177,40 @@ class TicTacToe extends Component {
     this.setState({turn})
   }
 
-  computerPlay() {
+  end() {
+    setTimeout(this.reset, 2000)
+
+
+    let winner = this.board.winner()
+    let wins = this.state.wins
+    if(wins[winner] !== undefined)
+      wins[winner]++
+
+    this.setState({wins})
+  }
+
+  computerPlay = () => {
     let computer = this.state.options.player == 'x' ? 'o' : 'x'
 
     let computerPlay = computerNextPlay(this.board, computer)
     this.board.play(computerPlay, computer)
+
+    let winner = this.board.winner()
+    let freeze = false
+
+    this.setState({freeze})
+
+    if(winner != '')
+      this.end()
   }
 
   play = (cell) => {
+    if(this.state.freeze)
+      return
+
     let winner = this.board.winner()
     let finished = winner != ''
+    let freeze = false
     if(!finished) {
       let turn = this.state.turn
       let correctPlay = this.board.play(cell, turn)
@@ -367,21 +222,14 @@ class TicTacToe extends Component {
         if(this.state.options.mode == 'pvp') {
           turn = turn == 'x' ? 'o' : 'x'
         } else if(!finished) {
-          this.computerPlay()
-
-          winner = this.board.winner()
-          finished = winner != ''
+          freeze = true
+          setTimeout(this.computerPlay, 700)
         }
 
-        this.setState({turn})
+        this.setState({turn, freeze})
 
         if(finished) {
-          setTimeout(this.reset, 2000)
-          let wins = this.state.wins
-          if(wins[winner] !== undefined)
-            wins[winner]++
-
-          this.setState({wins})
+          this.end()
         }
       }
     }
@@ -430,34 +278,37 @@ class TicTacToe extends Component {
 
   render() {
     return (
-      <div>
-        <BoardBackground winner = {this.board.winner()} onClick={this.closeOptions}>
-          <Title>
-            <TitleTic>Tic</TitleTic> Tac <TitleToe>Toe</TitleToe>
-          </Title>
-          <BoardBody>
-            {this.board.cells.map((c, i) => {
-              return <Cell key={i} onClick={() => this.play(i)} player = {c} turn = {this.state.turn} winner = {this.board.winner()}/>
-            })}
-          </BoardBody>
-          <Score>
-            <Wins player='x'>{this.state.wins.x}</Wins> - <Wins player='o'>{this.state.wins.o}</Wins>
-          </Score>
-          <OptionsBody collapsed={this.state.options.collapsed}>
-            <OptionTitle>Choose your team</OptionTitle>
-            <OptionList>
-              <OptionPlayer value={'x'} player={this.state.options.player} onClick={(e) => this.selectPlayer(e, 'x')} />
-              <OptionPlayer value={'o'} player={this.state.options.player} onClick={(e) => this.selectPlayer(e, 'o')} />
-            </OptionList>
-            <OptionTitle>Choose your opponent</OptionTitle>
-            <OptionList>
-              <OptionOpponent value={'pvp'} mode={this.state.options.mode} onClick={(e) => this.selectMode(e, 'pvp')} />
-              <OptionOpponent value={'pvc'} mode={this.state.options.mode} onClick={(e) => this.selectMode(e, 'pvc')} />
-            </OptionList>
-          </OptionsBody>
-          <OptionsToggle onClick={this.toggleOptions}>Options</OptionsToggle>
-        </BoardBackground>
-      </div>
+      <BoardBackground winner = {this.board.winner()} onClick={this.closeOptions}>
+        <Title>
+          <TitleTic>Tic</TitleTic> Tac <TitleToe>Toe</TitleToe>
+        </Title>
+        <Score>
+          <Wins player='x'>{this.state.wins.x}</Wins> - <Wins player='o'>{this.state.wins.o}</Wins>
+        </Score>
+        <BoardBody>
+          {this.board.cells.map((c, i) => {
+            return <Cell
+              frozen={this.state.freeze} key={i}
+              onClick={() => this.play(i)}
+              player = {c}
+              turn = {this.state.turn}
+              winner = {this.board.winner()}/>
+          })}
+        </BoardBody>
+        <OptionsBody collapsed={this.state.options.collapsed}>
+          <OptionTitle>Choose your team</OptionTitle>
+          <OptionList>
+            <OptionPlayer value={'x'} player={this.state.options.player} onClick={(e) => this.selectPlayer(e, 'x')} />
+            <OptionPlayer value={'o'} player={this.state.options.player} onClick={(e) => this.selectPlayer(e, 'o')} />
+          </OptionList>
+          <OptionTitle>Choose your opponent</OptionTitle>
+          <OptionList>
+            <OptionOpponent value={'pvp'} mode={this.state.options.mode} onClick={(e) => this.selectMode(e, 'pvp')} />
+            <OptionOpponent value={'pvc'} mode={this.state.options.mode} onClick={(e) => this.selectMode(e, 'pvc')} />
+          </OptionList>
+        </OptionsBody>
+        <OptionsToggle onClick={this.toggleOptions}>{this.state.options.collapsed ? 'Options' : 'Play'}</OptionsToggle>
+      </BoardBackground>
     )
   }
 }

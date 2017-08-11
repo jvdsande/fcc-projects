@@ -31,7 +31,7 @@ let fccAchievements = [
     href: "fcc/quote/"
   },
   {
-    title: "Simon's Game",
+    title: "Simon Game",
     href: "fcc/simon/"
   },
   {
