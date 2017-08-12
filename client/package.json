@@ -17,6 +17,7 @@
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-2": "^6.24.1",
     "html-entities": "^1.2.1",
+    "jsonp": "^0.2.1",
     "react": "^15.5.4",
     "react-dom": "^15.5.4",
     "react-scrollable-anchor": "^0.4.2",

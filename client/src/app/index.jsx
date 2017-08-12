@@ -68,7 +68,7 @@ class Achievement extends React.Component {
     return (
       <AchievementLink href={href+this.props.href}>
         <Title>{this.props.title}</Title>
-        <Preview scrolling="no" src={href+this.props.href} />
+        <Preview sandbox="allow-scripts" scrolling="no" src={href+this.props.href} />
         <NoClick />
       </AchievementLink>
     )

@@ -42,9 +42,8 @@ class SimonGame extends Component {
       onTime: 1000,
       win: false,
       fail: false,
+      init: false,
     }
-
-    this.hardReset()
   }
 
   reset = () => {
@@ -57,7 +56,7 @@ class SimonGame extends Component {
       onTime = 600
     }
 
-    this.setState({fail: false, current: 0, step: 'show', onTime})
+    this.setState({fail: false, current: 0, step: 'show', init: true, onTime})
 
     clearTimeout(this.timeout)
     setTimeout(this.show, onTime)
@@ -174,7 +173,7 @@ class SimonGame extends Component {
                 <OptionMode selected={this.state.mode} value={'easy'}   onClick={() => this.selectMode('easy')}>Easy</OptionMode>
                 <OptionMode selected={this.state.mode} value={'strict'} onClick={() => this.selectMode('strict')}>Strict</OptionMode>
               </Option>
-              <Reset onClick={this.hardReset}> Reset </Reset>
+              <Reset onClick={this.hardReset}> {this.state.init ? 'Reset' : 'Play'} </Reset>
             </BoardMiddle>
           </BoardBody>
         </BoardBackground>
