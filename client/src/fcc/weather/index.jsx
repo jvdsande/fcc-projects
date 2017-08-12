@@ -101,6 +101,8 @@ const ParticleBody = styled.div`
   background-image: url('./icons/${props => props.particle}.png');
   background-size: cover;
 
+  opacity: ${props => props.time == 'day' ? 1 : 0.8}
+
   width: 10%;
   height: 13.3333%;
 
@@ -223,7 +225,7 @@ class Particle extends Component {
   render() {
     let P = this.P
     if(P)
-      return <P particle={this.props.particle || 'clouds'} top={parseInt(this.state.top) + parseInt(this.props.offsetTop)} left={this.state.left} />
+      return <P particle={this.props.particle || 'clouds'} top={parseInt(this.state.top) + parseInt(this.props.offsetTop)} left={this.state.left} {...this.props}/>
     return null
   }
 }
