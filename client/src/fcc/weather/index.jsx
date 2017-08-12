@@ -65,6 +65,27 @@ const Panel = styled.div`
   font-size: 20px;
 `
 
+const ErrorPanel = styled.div`
+  background: black;
+  font-family: sans-serif;
+  color: white;
+  position: absolute;
+  top: 3vmin;
+  left: 3vmin;
+  bottom: 3vmin;
+  right: 3vmin;
+  border-radius: 1vmin;
+  opacity: 0.5;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  overflow: hidden;
+  font-size: 30px;
+`
+
+
 const City = styled.div`
   font-size: 140%;
   font-weight: bold;
@@ -82,6 +103,7 @@ const Temp = styled.div`
 
 const Unit = styled.span`
   cursor: pointer;
+  font-weight: bold;
 `
 
 const SunBody = styled.div`
@@ -171,18 +193,27 @@ class Sun extends Component {
   render() {
     let d = new Date()
     let h = d.getHours() + d.getMinutes()/60
-    h = h - 6
 
-    if(h < 0)
-      h += 24
+    let sunrise = this.props.hours.sunrise || 6
+    let sunset = this.props.hours.sunset || 18
 
-    if(this.props.time == 'night')
-      h -= 12
+    h = (h - sunrise + 24) % 24
 
+    let dayLength = sunset - sunrise
+    let nightLength = 24 - dayLength
 
-    let left = h * 90 / 12
-    let top = (h < 6 ? ((6 - h) * 20) / 6 : ((h - 6) * 20) / 6) + 4
+    if(h > dayLength)
+      h -= dayLength
 
+    let length = this.props.time == 'day' ? dayLength : nightLength
+    let halfLength = length / 2
+
+    let left = 100 * h / length - 5
+
+    let top = (h - halfLength) / halfLength * 30
+    if(h < halfLength) {
+      top = 30 - (h / halfLength * 30)
+    }
 
     return <SunBody {...this.props} top={top} left={left}/>
   }
@@ -336,9 +367,12 @@ class Weather extends Component {
           let weather = (JSON.parse(data))
           this.setState({weather})
         })
+      }, (err) => {
+        let error = 'Error: please use HTTPS'
+        this.setState({error})
       })
     } else {
-      let error = 'Error: please enable your location.'
+      let error = 'Error: please enable your location'
       this.setState({error})
     }
   }
@@ -368,21 +402,33 @@ class Weather extends Component {
       temp = Math.floor(celsius * 1.8 + 32)
     }
 
+    let sunrise = new Date(0)
+    sunrise.setUTCSeconds(sys.sunrise)
+    sunrise = sunrise.getHours() + sunrise.getMinutes() / 60
+
+    let sunset = new Date(0)
+    sunset.setUTCSeconds(sys.sunset)
+    sunset = sunset.getHours() + sunset.getMinutes() / 60
+
     let time = new Date().getHours()
-    time = time > 6 ? time < 18 ? 'day' : 'night' : 'night'
+    time = time > sunrise ? time < sunset ? 'day' : 'night' : 'night'
 
     return(
       <Background time={time}>
-        <Sun time={time} />
+        <Sun time={time} hours={{sunset, sunrise}} />
         <Particles time={time} offsetTop={0} config={WeatherID[code]} />
         <Foreground time={time}>
-          <Panel>
-            <br />
-            <City>{city} <small>{country}</small></City>
-            <Type>{type}</Type>
-            <Temp temp={celsius}>{temp}<Unit onClick={this.changeUnit}> °{this.state.unit}</Unit></Temp>
-            <br />
-          </Panel>
+          {this.state.error != '' ? (
+            <ErrorPanel>{this.state.error}</ErrorPanel>
+          ):(
+            <Panel>
+              <br />
+              <City>{city} <small>{country}</small></City>
+              <Type>{type}</Type>
+              <Temp temp={celsius}>{temp}<Unit onClick={this.changeUnit}> °{this.state.unit}</Unit></Temp>
+              <br />
+            </Panel>
+          )}
         </Foreground>
         <Particles time={time} offsetTop={5} config={WeatherID[code]} />
       </Background>
