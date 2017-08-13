@@ -50,8 +50,8 @@ const Panel = styled.div`
   font-family: sans-serif;
   color: white;
   position: absolute;
-  width: 200px;
-  height: 150px;
+  min-width: 200px;
+  min-height: 150px;
   bottom: 3vmin;
   right: 3vmin;
   border-radius: 1vmin;
@@ -89,6 +89,8 @@ const ErrorPanel = styled.div`
 const City = styled.div`
   font-size: 140%;
   font-weight: bold;
+  padding-left: 16px;
+  padding-right: 16px;
 `
 
 const Type = styled.div`
@@ -225,10 +227,11 @@ class Particle extends Component {
   constructor(props) {
     super(props)
 
+    let speed = Math.sqrt((props.wind || {}).speed) / 2
     this.state = {
       left: Math.random() * 110 - 10,
       top: Math.random()*30,
-      speed: Math.random()*2,
+      speed: Math.random()*speed,
     }
 
     this.interval = setInterval(this.update, 1000)
@@ -247,16 +250,24 @@ class Particle extends Component {
     this.P = null
     this.setState({left: -10})
     setTimeout(() => {
+      let speed = Math.sqrt(this.props.wind.speed) / 2
+
       this.P = ParticleBody
-      this.setState({speed: Math.random()*2, top: Math.random()*30})
+      this.setState({speed: Math.random()*speed, top: Math.random()*30})
       this.interval = setInterval(this.update, 1000)
     }, 1000)
   }
 
   render() {
     let P = this.P
+    let direction = (this.props.wind || {}).deg > 180 ? 1 : -1
+    let add = 0
+
+    if(direction < 0)
+      add = 90
+
     if(P)
-      return <P particle={this.props.particle || 'clouds'} top={parseInt(this.state.top) + parseInt(this.props.offsetTop)} left={this.state.left} {...this.props}/>
+      return <P particle={this.props.particle || 'clouds'} top={parseInt(this.state.top) + parseInt(this.props.offsetTop)} left={add + direction * this.state.left} {...this.props}/>
     return null
   }
 }
@@ -351,30 +362,47 @@ class Weather extends Component {
       error: '',
     }
 
-    this.refresh()
+    this.position = {
+      lat: 0,
+      lon: 0,
+    }
 
-    // Refresh every minute
+
+    this.getPosition()
+
+    // Refresh weather every minute
     setInterval(this.refresh, 60 * 1000)
+
+    // Refresh position every 30 minutes
+    setInterval(this.getPosition, 30 * 60 * 1000)
   }
 
-  refresh = () => {
-    if (navigator.geolocation) {
+  getPosition = () => {
+    if(navigator.geolocation) {
       navigator.geolocation.getCurrentPosition((position) => {
         let lat = position.coords.latitude
         let lon = position.coords.longitude
 
-        get.concat(`https://fcc-weather-api.glitch.me/api/current?lat=${lat}&lon=${lon}`, (err, res, data) => {
-          let weather = (JSON.parse(data))
-          this.setState({weather})
-        })
+        this.position = {lat, lon}
+
+        this.refresh()
       }, (err) => {
         let error = 'Error: please use HTTPS'
         this.setState({error})
       })
     } else {
-      let error = 'Error: please enable your location'
+      let error = 'Error: your browser does not support location-based services'
       this.setState({error})
     }
+  }
+
+  refresh = () => {
+    let lat = this.position.lat
+    let lon = this.position.lon
+    get.concat(`https://fcc-weather-api.glitch.me/api/current?lat=${lat}&lon=${lon}`, (err, res, data) => {
+      let weather = (JSON.parse(data))
+      this.setState({weather})
+    })
   }
 
   changeUnit = () => {
@@ -396,7 +424,7 @@ class Weather extends Component {
     let code = weather.id || 800
 
     let celsius = (infos.main || {}).temp || 0
-    let temp = celsius
+    let temp = Math.floor(celsius)
 
     if(this.state.unit == 'F') {
       temp = Math.floor(celsius * 1.8 + 32)
@@ -410,14 +438,19 @@ class Weather extends Component {
     sunset.setUTCSeconds(sys.sunset)
     sunset = sunset.getHours() + sunset.getMinutes() / 60
 
-    let time = new Date().getHours()
+    let time = new Date()
+    time = time.getHours() + time.getMinutes() / 60
     time = time > sunrise ? time < sunset ? 'day' : 'night' : 'night'
+
+
+    let wind = infos.wind
 
     return(
       <Background time={time}>
         <Sun time={time} hours={{sunset, sunrise}} />
-        <Particles time={time} offsetTop={0} config={WeatherID[code]} />
+        <Particles time={time} offsetTop={0} config={WeatherID[code]} wind={wind} />
         <Foreground time={time}>
+          <Particles time={time} offsetTop={5} config={WeatherID[code]} wind={wind} />
           {this.state.error != '' ? (
             <ErrorPanel>{this.state.error}</ErrorPanel>
           ):(
@@ -430,7 +463,6 @@ class Weather extends Component {
             </Panel>
           )}
         </Foreground>
-        <Particles time={time} offsetTop={5} config={WeatherID[code]} />
       </Background>
     )
   }
