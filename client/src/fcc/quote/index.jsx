@@ -1,123 +1,16 @@
 import React, {Component} from 'react'
 import ReactDOM from 'react-dom'
 
-import styled from 'styled-components'
-
 import get from 'simple-get'
 import {AllHtmlEntities} from 'html-entities'
 
 const entities = new AllHtmlEntities()
 
-
-const Background = styled.div`
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  top: 0;
-  background-color: #C5E1A5;
-  transition: all .5s;
-  &::after {
-    display: block;
-    content: ' ';
-    position: absolute;
-    right: 0;
-    width: 12%;
-    background-color: #9CCC65;
-    top: 0;
-    bottom: 0;
-  }
-`
-
-const Foreground = styled.div`
-  position: absolute;
-  top: 0;
-  right: 0;
-  left: 0;
-  min-height: 40%;
-  max-height: 100%;
-  padding-bottom: 64px;
-  background-color: white;
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  align-content: center;
-  justify-content: center;
-  overflow: none;
-  &::after {
-    display: block;
-    content: ' ';
-    position: absolute;
-    left: 0;
-    width: 12%;
-    background-color: #EEEEEE;
-    top: 0;
-    bottom: 0;
-  }
-`
-
-const Content = styled.div`
-  position: relative;
-  color: #424242;
-  text-align: left;
-  font-size: calc(24px + 2vmin);
-  font-family: sans-serif;
-  display: inline-block;
-  max-width: 720px;
-  width: 70%;
-`
-
-const Author = styled.div`
-  position: relative;
-  text-align: right;
-  font-family: serif;
-  font-size: calc(24px + 1vmin);
-  font-style: italic;
-  display: inline-block;
-  max-width: 720px;
-  width: 70%;
-`
-
-const NewQuote = styled.button`
-  position: absolute;
-  background-color: #C5E1A5;
-  opacity: 0.7;
-  width: 100px;
-  height: 44px;
-  border: none;
-  outline: none;
-  font-size: 100%;
-  color: black;
-  font-weight: bold;
-  border-radius: 4px;
-  bottom: 8px;
-  right: 15%;
-  cursor: pointer;
-`
-
-const Twitter = styled.a`
-  position: absolute;
-  background-color: #C5E1A5;
-  background-image: url('./twitter.png');
-  background-size: cover;
-  opacity: 0.7;
-  width: 44px;
-  height: 44px;
-  border: none;
-  outline: none;
-  font-size: 100%;
-  color: black;
-  font-weight: bold;
-  border-radius: 4px;
-  bottom: 8px;
-  right: calc(15% + 110px);
-  cursor: pointer;
-`
-
-let test = `
-`
-
+import {
+  Background, Foreground,
+  Content, Author,
+  NewQuote, Twitter,
+} from './styles'
 
 
 class Quote extends Component {
@@ -137,7 +30,6 @@ class Quote extends Component {
       author: '',
       twitterQuote: '',
     }
-
   }
 
   getNextQuote = () => {
