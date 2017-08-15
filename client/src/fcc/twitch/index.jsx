@@ -1,19 +1,22 @@
 import React, {Component} from 'react'
 import ReactDOM from 'react-dom'
 
-import styled, {injectGlobal} from 'styled-components'
-
 import jsonp from 'jsonp'
 
-const channels = [
-  'ESL_SC2',
-  'OgamingSC2',
-  'cretetion',
+import {
+  Board, Channel,
+  ChannelSpacer,
+  Name, Status, Title, Now,
+} from './styles'
+
+const channelNames = [
   'freecodecamp',
-  'storbeck',
-  'habathcx',
+  'salakar',
+  'noobs2ninjas',
   'RobotCaleb',
-  'noobs2ninjas'
+  'vfujin',
+  'omatum_greg',
+  'lobosjr',
 ]
 
 class Twitch extends Component {
@@ -26,7 +29,7 @@ class Twitch extends Component {
     }
 
 
-    channels.map(c => {
+    channelNames.map(c => {
       jsonp(`https://wind-bow.gomix.me/twitch-api/streams/${c}`, (err, data) => {
         let loaded = this.state.loaded
         if(this.channels[c] !== undefined) {
@@ -56,14 +59,55 @@ class Twitch extends Component {
   }
 
   render() {
-    if(this.state.loaded == channels.length) {
-      console.log(this.channels)
+    let channels = []
+    if(this.state.loaded == channelNames.length) {
+      channels = Object.keys(this.channels)
+
+
+      channels = channels.sort((a, b) => {
+        a = this.channels[a]
+        b = this.channels[b]
+        if(a.streams.stream) {
+          if(b.streams.stream) {
+            return a.info.display_name[0].toUpperCase() > b.info.display_name[0].toUpperCase() ? 1 : -1
+          }
+          return -1
+        } else {
+          if(b.streams.stream) {
+            return 1
+          }
+          return a.info.display_name[0].toUpperCase() > b.info.display_name[0].toUpperCase() ? 1 : -1
+        }
+      })
     }
     return (
-      <div>
-        {this.state.loaded == channels.length ? 'All loaded' : 'Loading...'}
-        <br />
-        {this.state.loaded == channels.length ? JSON.stringify(this.channels) : ''} </div>
+      <Board>
+        <Title>Twitch Channels</Title>
+        {channels.map(c => {
+          let channel = this.channels[c]
+
+          let online = channel.info.status && channel.streams.stream
+          let status = (channel.info.status || '')
+
+          if(channel.info) {
+            return (
+              <Channel online={online} src={channel.info.logo || './default.png'} href={channel.info.url || ''}>
+                <Name>{channel.info.display_name || c}</Name>
+                {online ? <Status><Now>Now Streaming:</Now>{status}</Status> : null}
+
+              </Channel>
+            )
+          }
+
+          return null
+        })}
+        <ChannelSpacer />
+        <ChannelSpacer />
+        <ChannelSpacer />
+        <ChannelSpacer />
+        <ChannelSpacer />
+        <ChannelSpacer />
+      </Board>
     )
   }
 }
