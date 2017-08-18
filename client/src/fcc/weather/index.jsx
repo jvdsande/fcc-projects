@@ -126,6 +126,10 @@ class Weather extends Component {
   }
 }
 
+if(window.location.protocol == 'http:')
+{
+  window.location.href = 'https://'+window.location.hostname+window.location.pathname
+}
 
 let target = document.getElementById('root')
 ReactDOM.render(<Weather />, target)

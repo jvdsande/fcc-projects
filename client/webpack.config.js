@@ -17,6 +17,7 @@ var config = {
     'fcc/tribute/':     APP_DIR + '/fcc/tribute/index.jsx',
     'fcc/twitch/':      APP_DIR + '/fcc/twitch/index.jsx',
     'fcc/weather/':     APP_DIR + '/fcc/weather/index.jsx',
+    'fcc/wikipedia/':   APP_DIR + '/fcc/wikipedia/index.jsx',
     'piechart/':        APP_DIR + '/piechart/index.jsx'
   },
   devtool: 'source',

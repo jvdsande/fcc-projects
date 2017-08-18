@@ -1,5 +1,12 @@
+/* Import React and React DOM as our main framework   */
 import React from 'react'
+
+/* ScrollableAnchor helps creating a smooth navigation  */
 import ScrollableAnchor from 'react-scrollable-anchor'
+
+/* Import the custom styles from 'styles.jsx'.
+ * 'styled-components' is used to keep the best of both the React and CSS
+ * worlds   */
 import {
   PortfolioBody,
   Link, Title,
@@ -10,14 +17,18 @@ import {
   Footer,
 } from './styles'
 
-let personalAchievements = [
+
+
+/* Create an array of personal projects */
+const personalAchievements = [
   {
     title: "React Pie Charts",
     href: "piechart/"
   }
 ]
 
-let fccAchievements = [
+/* Create an array with each FreeCodeCamp project  */
+const fccAchievements = [
   {
     title: "Calculator",
     href: "fcc/calculator/"
@@ -58,17 +69,21 @@ let fccAchievements = [
 
 
 
+/* The Achievement component renders an IFrame with a title and link to the
+ * corresponding page   */
 class Achievement extends React.Component {
   render() {
+    /*
     let href = window.location.href
     href = href.split('/')
     href.pop()
     href.push('')
     href = href.join('/')
+    */
     return (
-      <AchievementLink href={href+this.props.href}>
+      <AchievementLink href={this.props.href}>
         <Title>{this.props.title}</Title>
-        <Preview sandbox="allow-scripts" scrolling="no" src={href+this.props.href} />
+        <Preview sandbox="allow-scripts" scrolling="no" src={this.props.href} />
         <NoClick />
       </AchievementLink>
     )

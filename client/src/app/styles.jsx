@@ -77,7 +77,7 @@ export const PortfolioBody = styled.div`
 `
 
 /* Achievements       */
-export const Preview = styled.embed`
+export const Preview = styled.iframe`
   transform: scale(0.3);
   transform-origin: 0 0;
   width: 1280;
@@ -93,7 +93,7 @@ export const NoClick = styled.div`
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(0,0,0,0);
+  background: rgba(0,0,0,0.01); /* Disable click & scroll on mobile */
 `
 
 export const Achievements = styled.div`
