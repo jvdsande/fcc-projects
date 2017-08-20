@@ -1,38 +1,23 @@
-import React from 'react'
-import ReactDOM from 'react-dom'
-import {injectGlobal} from 'styled-components'
+/******************************************************************************/
+/* file: index.jsx                                                            */
+/* author: Jeremie van der Sande                                              */
+/******************************************************************************/
+/* Entry point of the Portfolio project, and main page of www.jeremie-vds.com */
+/******************************************************************************/
 
+
+/* Import React as our main framework                                         */
+import React from 'react'
+
+/* Import React DOM to inject our components                                  */
+import ReactDOM from 'react-dom'
+
+/* Import the Portfolio component                                             */
 import {Portfolio} from './app'
 
 
-let ReactRoot = ReactDOM.render(<Portfolio />, document.getElementById('root'))
+/* The <div id='root'> element of our HTML will render our components         */
+let target = document.getElementById('root')
 
-injectGlobal `
-  * {
-    font-family: sans-serif;
-  }
-
-  html, body {
-    padding: 0;
-    margin: 0;
-  }
-
-  body {
-    background: #888888;
-    text-align: center;
-    font-family: 'Open Sans', sans-serif;
-  }
-
-
-  h2 {
-    color: #009688;
-    font-size: 130%;
-  }
-
-  h3 {
-    color: #00796B;
-    text-align: left;
-    font-size: 150%;
-    font-weight: bold;
-  }
-`
+/* Render the Portfolio project                                               */
+ReactDOM.render(<Portfolio />, target)
