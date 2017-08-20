@@ -1,14 +1,30 @@
+/******************************************************************************/
+/* file: index.jsx                                                            */
+/* author: Jeremie van der Sande                                              */
+/******************************************************************************/
+/* Background component with on-load shape generation and on-prop color       */
+/******************************************************************************/
+
+
+/* Import React as our main framework                                         */
 import React, {Component} from 'react'
 
+/* Import the custom styles from 'styles.jsx'.
+ * 'styled-components' is used to keep the best of both the React and CSS
+ * worlds                                                                     */
 import {Back} from './styles'
 
 export default class Background extends Component {
   constructor() {
     super()
 
+    /* Generate a random point in the range of (-50;-50) to (0:0) or
+       (100;100) to (150;150)                                                 */
     function randomPoint() {
-      let x = Math.floor(Math.random() * 250 - 50)
-      let y = Math.floor(Math.random() * 250 - 50)
+      let x = Math.floor(Math.random() * -50)
+      let y = Math.floor(Math.random() * -50)
+      x += Math.floor(Math.random() * 2) * 200
+      y += Math.floor(Math.random() * 2) * 200
       return x + "," + y
     }
 
@@ -17,7 +33,8 @@ export default class Background extends Component {
 
     this.triangles = []
 
-    let i = 300
+    /* Create three triangles                                                 */
+    let i = 3
     while(i--) {
       let pc = randomPoint()
       this.triangles.push({pa,pb,pc})
@@ -26,23 +43,14 @@ export default class Background extends Component {
     }
   }
 
+  /* Only update the component when the color changes                         */
   shouldComponentUpdate(nProps) {
     return (nProps.color != this.props.color)
   }
 
   render()
   {
-    function componentToHex(c) {
-      var hex = c.toString(16);
-      return hex.length == 1
-        ? "0" + hex
-        : hex;
-    }
-
-    function rgbToHex(r, g, b) {
-      return "#" + componentToHex(r) + componentToHex(g) + componentToHex(b)
-    }
-
+    /* Array of colors to be chosen from. Each cell is an array of gradients  */
     const colors = [
       [ // Grey
         '#78909C',
@@ -50,7 +58,7 @@ export default class Background extends Component {
         '#546E7A',
         '#455A64',
         '#37474F',
-       '#263238'
+        '#263238'
      ],
       [ // Green
         '#66BB6A',
@@ -70,16 +78,18 @@ export default class Background extends Component {
       ],
     ]
 
-    let idx = 0
+    /* Cycle through the color gradients                                      */
+    let idx = Math.floor(Math.random()*6)
     let c = this.props.color
-    function randomColor() {
+    function nextColor() {
       idx = (idx+1)%6
       return colors[c][idx]
     }
 
+    /* Create the polygon element with a random color                         */
     function createTriangle(i) {
       let t = <polygon points={i.pa + " " + i.pb + " " + i.pc} style={{
-        fill: randomColor(),
+        fill: nextColor(),
         transition: "all 1s"
       }}/>
       return t
@@ -88,19 +98,23 @@ export default class Background extends Component {
 
     return (
       <Back>
+        {/* Create an SVG element with a (0;0) -> (100;100 viewport)          */}
         <svg height="100%" width="100%" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid slice">
-          <polygon points="-100,-100 300,-100 300,300" style={{
-            fill: randomColor(),
+          {/* Fill the viewport will a first color                            */}
+          <polygon points="-100,-100 300,-100 300,300, -100,300" style={{
+            fill: nextColor(),
             transition: "all 1s"
           }}/>
+
+          {/* Add a first stripe                                              */}
           <polygon points="-100,-100 300,300 -100,300" style={{
-            fill: randomColor(),
+            fill: nextColor(),
             transition: "all 1s"
           }}/>
+
+          {/* Draw all triangles                                              */}
           {
-            this.triangles.map(function(i) {
-              return createTriangle(i)
-            })
+            this.triangles.map(i => createTriangle(i))
           }
         </svg>
       </Back>

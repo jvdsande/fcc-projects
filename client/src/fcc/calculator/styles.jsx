@@ -2,11 +2,11 @@
 /* file: styles.jsx                                                           */
 /* author: Jeremie van der Sande                                              */
 /******************************************************************************/
-/* Styles for the Portfolio app                                               */
+/* Styles for the Calculator app                                              */
 /******************************************************************************/
 
 /* 'styled-components' is used to keep the best of both the React and CSS
- * worlds   */
+ * worlds                                                                     */
 import styled, {injectGlobal} from 'styled-components'
 
 

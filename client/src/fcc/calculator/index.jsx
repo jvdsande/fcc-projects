@@ -314,5 +314,5 @@ class Calculator extends Component {
 /* The <div id='root'> element of our HTML will render our components         */
 let target = document.getElementById('root')
 
-/* Render the Calculator project                                               */
+/* Render the Calculator project                                              */
 ReactDOM.render(<Calculator />, target)
