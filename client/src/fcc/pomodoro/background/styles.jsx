@@ -2,7 +2,7 @@
 /* file: styles.jsx                                                           */
 /* author: Jeremie van der Sande                                              */
 /******************************************************************************/
-/* Styles for the Backgroundcomponent                                         */
+/* Styles for the Background component                                        */
 /******************************************************************************/
 
 /* 'styled-components' is used to keep the best of both the React and CSS

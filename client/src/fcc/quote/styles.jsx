@@ -1,5 +1,16 @@
-import styled from 'styled-components'
+/******************************************************************************/
+/* file: styles.jsx                                                           */
+/* author: Jeremie van der Sande                                              */
+/******************************************************************************/
+/* Styles for the Quote app                                                   */
+/******************************************************************************/
 
+/* 'styled-components' is used to keep the best of both the React and CSS
+ * worlds                                                                     */
+import styled, {withComponent} from 'styled-components'
+
+
+/* Prepare a common CSS base for the Foreground and Background                */
 const AbsoluteFullWidth = styled.div`
   position: absolute;
   left: 0;
@@ -7,6 +18,8 @@ const AbsoluteFullWidth = styled.div`
   top: 0;
 `
 
+/* Background: <div> element herited from AbsoluteFullWidth, to display the
+ * background. Add a stripe to the side using the ::after pseudo element      */
 export const Background = styled(AbsoluteFullWidth)`
   bottom: 0;
   background-color: #C5E1A5;
@@ -23,6 +36,8 @@ export const Background = styled(AbsoluteFullWidth)`
   }
 `
 
+/* Foreground: <div> element herited from AbsoluteFullWidth, to display the
+ * foreground and content. Add a stripe to the side using ::after             */
 export const Foreground = styled(AbsoluteFullWidth)`
   min-height: 40%;
   max-height: 100%;
@@ -46,6 +61,7 @@ export const Foreground = styled(AbsoluteFullWidth)`
   }
 `
 
+/* Prepare a CSS base for Content and Author                                  */
 const RelativeText = styled.div`
   position: relative;
   display: inline-block;
@@ -53,6 +69,9 @@ const RelativeText = styled.div`
   width: 70%;
 `
 
+
+/* Content: <div> element for displaying the Quote content. The font size is
+            dependant of the screen size                                      */
 export const Content = styled(RelativeText)`
   color: #424242;
   text-align: left;
@@ -60,45 +79,46 @@ export const Content = styled(RelativeText)`
   font-family: sans-serif;
 `
 
+/* Author: <div> element for the Author name. Italic and aligned right        */
 export const Author = styled(RelativeText)`
-  text-align: right;
-  font-family: serif;
-  font-size: calc(24px + 1vmin);
   font-style: italic;
+  text-align: right;
+  font-size: calc(24px + 1vmin);
+  font-family: serif;
 `
 
-export const NewQuote = styled.button`
+
+/* Prepare a CSS base for buttons. No border or active outline, small border
+   radius                                                                     */
+const Button = styled.button`
   position: absolute;
   background-color: #C5E1A5;
   opacity: 0.7;
-  width: 100px;
   height: 44px;
   border: none;
   outline: none;
   font-size: 100%;
-  color: black;
   font-weight: bold;
+  color: black;
   border-radius: 4px;
+  cursor: pointer;
+`
+
+/* NewQuote: <button> element for requesting a new quote                      */
+export const NewQuote = styled(Button)`
+  width: 100px;
+
   bottom: 8px;
   right: 15%;
-  cursor: pointer;
 `
 
-export const Twitter = styled.a`
-  position: absolute;
-  background-color: #C5E1A5;
+/* Twitter: <button> element for sharing on Twitter                           */
+export const Twitter = styled(Button)`
   background-image: url('./twitter.png');
   background-size: cover;
-  opacity: 0.7;
+
   width: 44px;
-  height: 44px;
-  border: none;
-  outline: none;
-  font-size: 100%;
-  color: black;
-  font-weight: bold;
-  border-radius: 4px;
+
   bottom: 8px;
   right: calc(15% + 110px);
-  cursor: pointer;
 `
