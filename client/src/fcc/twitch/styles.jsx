@@ -1,5 +1,15 @@
+/******************************************************************************/
+/* file: styles.jsx                                                           */
+/* author: Jeremie van der Sande                                              */
+/******************************************************************************/
+/* Styles for the Twitch app                                                  */
+/******************************************************************************/
+
+/* 'styled-components' is used to keep the best of both the React and CSS
+ * worlds                                                                     */
 import styled from 'styled-components'
 
+/* Board: <div> element taking the complete page, with a display 'flex'       */
 export const Board = styled.div`
   display: flex;
   flex-direction: row;
@@ -20,6 +30,8 @@ export const Board = styled.div`
   font-family: 'Saira Semi Condensed', sans-serif;
 `
 
+/* Title: <div> element holding the Board's title, centered and taking the
+          whole width                                                         */
 export const Title = styled.div`
   flex: none;
   width: 100%;
@@ -37,6 +49,7 @@ export const Title = styled.div`
   text-shadow: 0 0 5px #171717;
 `
 
+/* Channel: <a> element used for displaying a channel                         */
 export const Channel = styled.a`
   position: relative;
   flex: none;
@@ -74,6 +87,8 @@ export const Channel = styled.a`
   }
 `
 
+/* ChannelSpacer: Dummy <Channel> element to align the Board's children left
+ * despite the 'space-around' property                                        */
 export const ChannelSpacer = styled(Channel)`
   height: 0;
   max-height: 0;
@@ -83,6 +98,7 @@ export const ChannelSpacer = styled(Channel)`
   box-shadow: none;
 `
 
+/* Prepare a common set of properties for the Name and Status elements        */
 export const AbsoluteOverlay = styled.div`
   position: absolute;
   left: 0;
@@ -96,6 +112,7 @@ export const AbsoluteOverlay = styled.div`
   text-align: center;
 `
 
+/* Name: <div> element for displaying the channel's name                      */
 export const Name = styled(AbsoluteOverlay)`
   top: 0;
 
@@ -106,6 +123,7 @@ export const Name = styled(AbsoluteOverlay)`
   max-height: 30%;
 `
 
+/* Status: <div> element for displaying online channels' stream               */
 export const Status = styled(AbsoluteOverlay)`
   bottom: 0;
 
@@ -120,6 +138,7 @@ export const Status = styled(AbsoluteOverlay)`
   text-overflow: ellipsis;
 `
 
+/* Now: <div> element used as a title for online channels                     */
 export const Now = styled.div`
   font-size: 110%;
   color: #4CAF50;

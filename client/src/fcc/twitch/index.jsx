@@ -160,7 +160,7 @@ class Twitch extends Component {
           )
         })}
 
-        {/* The ChannelSpacer allows to align channels to the right despite the
+        {/* The ChannelSpacer allows to align channels to the left despite the
           * flexbox 'space-around' property                                   */}
         <ChannelSpacer />
         <ChannelSpacer />
