@@ -1,6 +1,16 @@
+/******************************************************************************/
+/* file: styles.jsx                                                           */
+/* author: Jeremie van der Sande                                              */
+/******************************************************************************/
+/* Styles for the Wikipedia app                                               */
+/******************************************************************************/
+
+/* 'styled-components' is used to keep the best of both the React and CSS
+ * worlds                                                                     */
 import styled from 'styled-components'
 
 
+/* Body: <div> element used as our main page body. Fills the complete page    */
 export const Body = styled.div`
   position: absolute;
   top: 0;
@@ -16,12 +26,14 @@ export const Body = styled.div`
   text-align: center;
 `
 
+/* Header: <div> element used as the page title                               */
 export const Header = styled.div`
   width: 100%;
   text-align: center;
   font-size: 300%;
 `
 
+/* SearchBox: <input> element styled with a search icon                       */
 export const SearchBox = styled.input`
   width: 320px;
   height: 32px;
@@ -42,6 +54,7 @@ export const SearchBox = styled.input`
   background-repeat: no-repeat;
 `
 
+/* Prepare a set of common properties for Random and Link                     */
 const A = styled.a`
   color: #AD1457;
   text-decoration: none;
@@ -52,11 +65,13 @@ const A = styled.a`
   }
 `
 
+/* Random: <a> element to load a random article                               */
 export const Random = styled(A)`
   display: inline-block;
   margin-bottom: 16px;
 `
 
+/* Articles: <div> element with a 'flex' display, to hold a list of articles  */
 export const Articles = styled.div`
   display: flex;
 
@@ -68,6 +83,7 @@ export const Articles = styled.div`
   align-items: stretch;
 `
 
+/* Article: <div> element containing the preview of an article                */
 export const Article = styled.div`
   position: relative;
 
@@ -90,12 +106,15 @@ export const Article = styled.div`
   border-radius: 5px;
 `
 
+/* ArticleSpacer: dummy <Article> to align the Article left despite the
+                  'space-around' property of Articles                         */
 export const ArticleSpacer = styled(Article)`
   height: 0;
   padding: 0;
   box-shadow: none;
 `
 
+/* Thumbnail: <img> element for showing the article's thumbnail image         */
 export const Thumbnail = styled.img`
   display: inline-block;
   width: 64px;
@@ -108,17 +127,23 @@ export const Thumbnail = styled.img`
   box-shadow: 0 0 10px 5px #E0E0E0;
 `
 
+/* Title: <div> element to hold the article's title                           */
 export const Title = styled.div`
   font-size: 110%;
   margin-bottom: 10px;
 `
 
+/* Content: <div> element to hold the article's extract                       */
 export const Content = styled.div`
-  padding-bottom: 24px;
   color: #424242;
   text-align: justify;
+
+  /* The padding-bottom reserve space after the longest article content for
+     the Link element                                                         */
+  padding-bottom: 24px;
 `
 
+/* Link: <a> element to link to the full article                              */
 export const Link = styled(A)`
   color: #AD1457;
   text-align: right;

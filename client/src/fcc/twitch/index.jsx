@@ -2,7 +2,7 @@
 /* file: index.jsx                                                            */
 /* author: Jeremie van der Sande                                              */
 /******************************************************************************/
-/* Entry point and main component for the Pomodoro project                    */
+/* Entry point and main component for the Twitch project                      */
 /******************************************************************************/
 
 
