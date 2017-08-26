@@ -2,7 +2,7 @@
 /* file: styles.jsx                                                           */
 /* author: Jeremie van der Sande                                              */
 /******************************************************************************/
-/* Styles for the Pomodoro app                                                */
+/* Styles for the TicTacToe app                                               */
 /******************************************************************************/
 
 /* 'styled-components' is used to keep the best of both the React and CSS
