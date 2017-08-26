@@ -1,8 +1,16 @@
+/******************************************************************************/
+/* file: styles.jsx                                                           */
+/* author: Jeremie van der Sande                                              */
+/******************************************************************************/
+/* Styles for the Pomodoro app                                                */
+/******************************************************************************/
+
+/* 'styled-components' is used to keep the best of both the React and CSS
+ * worlds                                                                     */
 import styled from 'styled-components'
 
-/* Title    */
+/* Title: <div> element containing the game's title                           */
 export const Title = styled.div`
-  font-family: 'Gloria Hallelujah', cursive;
   position: absolute;
   top: 2vmin;
   left: 0;
@@ -11,16 +19,25 @@ export const Title = styled.div`
   text-align: center;
   color: #F5F5F5;
 `
+
+/* TitleTic: <span> element to change the color of part of the name           */
 export const TitleTic = styled.span`
   color: #FFF8E1;
 `
+
+/* TitleTac: <span> element to change the color of another part of the name   */
 export const TitleToe = styled.span`
   color: #EDE7F6;
 `
 
 
-/* Game Board     */
+
+
+
+/* BoardBackground: <div> element to display a background which changes color
+                    with the app state. It is also the root of our Component  */
 export const BoardBackground = styled.div`
+  font-family: 'Gloria Hallelujah', cursive;
   position: absolute;
   top: 0;
   left: 0;
@@ -40,26 +57,28 @@ export const BoardBackground = styled.div`
   justify-content: center;
 `
 
+
+/* BoardBody: <div> element centered on the page, containing the board        */
 export const BoardBody = styled.div`
   position: relative;
   width: 330px;
   height: 330px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-content: space-around;
 `
 
+/* Cell: <div> element for displaying a cell. A cell is round and its background
+         reflects if a player has played it, and which player it was          */
 export const Cell = styled.div`
-  display: inline-block;
-  width: 33.33%;
-  height: 33.33%;
+  width: 30%;
+  height: 30%;
   box-sizing: border-box;
   border-radius: 100%;
-  border: 7px solid ${props => {
-    switch(props.winner) {
-      case 'x': return '#FFE082'
-      case 'o': return '#B39DDB'
-      case 'draw' : return '#E0E0E0'
-      default:  return 'white'
-    }
-  }};
+
+  /* Select the background according to whether a player has played the cell,
+     and which player it was                                                  */
   background-color: ${props => {
     switch(props.player) {
       case 'x': return '#FF8F00'
@@ -67,59 +86,72 @@ export const Cell = styled.div`
       default:  return '#EEEEEE'
     }
   }};
+
+  /* Hint the user that the cell is clickable, if the board is not frozen     */
   cursor: ${props => props.frozen?'default':'pointer'};
+
+  /* Ease the changing of background when someone plays                       */
   transition: all .5s;
 
+
+  /* On hover, change the background of unused cells to reflect the player who
+     is about to play                                                         */
   &:hover {
-    ${props => {
+    background-color: ${props => {
+        /* Do not apply hover effect is the board is frozen or if the cell is
+           already played by someone                                          */
         if(props.player != '' || props.frozen)
           return
 
         switch(props.turn) {
-          case 'x': return 'background-color: #FFE082'
-          case 'o': return 'background-color: #B39DDB'
+          case 'x': return '#FFE082'
+          case 'o': return '#B39DDB'
+          default:  return '#EEEEEE'
         }
-    }}
+    }};
   }
 `
 
-
-/* Option Panel   */
-
+/* OptionsToggle: <div> element allowing to show/hide the option panel        */
 export const OptionsToggle = styled.div`
-  font-family: 'Gloria Hallelujah', cursive;
   text-align: center;
-  color: #757575;
   position: absolute;
   bottom: calc(50% - 210px);
   right: calc(50% - 160px);
   height: 36px;
   width: 106px;
-  background: #EEEEEE;
   border-radius: 36px;
   cursor: pointer;
+
+  background-color: #EEEEEE;
+  color: #757575;
+
   &:hover {
-    background: #757575;
+    background-color: #757575;
     color: #EEEEEE;
   }
 `
 
+/* OptionsBody: <div> element containing the option panel                     */
 export const OptionsBody = styled.div`
   position: absolute;
-  bottom: calc(50% - ${props => props.collapsed? '210px' : '165px'});
   right: calc(50% - 160px);
-  width: ${props => props.collapsed? '106px' : '330px'};
-  height: ${props => props.collapsed? '36px' : '330px'};
   border-radius: 50px;
   padding: 0;
   margin: 0;
   background: #EEEEEE;
-  transition: all .3s;
   overflow: hidden;
+
+  /* Change the position, width and height based on the collapsed property, to
+     create an open/close animation                                           */
+  bottom: calc(50% - ${props => props.collapsed? '210px' : '165px'});
+  width: ${props => props.collapsed? '106px' : '330px'};
+  height: ${props => props.collapsed? '36px' : '330px'};
+  transition: all .3s;
 `
 
+/* OptionTitle: <div> element for displaying a title for a specific option    */
 export const OptionTitle = styled.div`
-  font-family: 'Gloria Hallelujah', cursive;
   color: #757575;
   width: 100%;
   font-size: 30px;
@@ -127,6 +159,7 @@ export const OptionTitle = styled.div`
   margin: 10px 0;
 `
 
+/* OptionList: <div> element for wrapping different values for an option      */
 export const OptionList = styled.div`
   display: flex;
   flex-direction: row;
@@ -135,13 +168,16 @@ export const OptionList = styled.div`
   justify-content: space-around;
 `
 
+/* OptionPlayer: <div> element for displaying a choice for the player's team.
+                 The background color reflects the team to choose, and the width
+                 and opacity reflects the select state                        */
 export const OptionPlayer = styled.div`
   display: inline-block;
   width: ${props => props.value == props.player ? '65px' : '45px'};
   height: ${props => props.value == props.player ? '65px' : '45px'};
   margin: ${props => props.value == props.player ? '0' : '10px'} 0;
   border-radius: 100%;
-  background: ${props => props.value == 'x' ? '#FF8F00' : '#4527A0'};
+  background-color: ${props => props.value == 'x' ? '#FF8F00' : '#4527A0'};
   opacity: ${props => props.value == props.player ? 1 : 0.3};
   cursor: pointer;
 
@@ -150,6 +186,9 @@ export const OptionPlayer = styled.div`
   }
 `
 
+/* OptionOpponent: <div> element for displaying a choice for the game's mode.
+                 The background image reflects the mode to choose, and the width
+                 and opacity reflects the select state                        */
 export const OptionOpponent = styled.div`
   display: inline-block;
   width: ${props => props.value == props.mode ? '75px' : '65px'};
@@ -169,10 +208,10 @@ export const OptionOpponent = styled.div`
 `
 
 
-/*  Score     */
 
+/* Score: <div> element for displaying the current score. Positionned at the
+          bottom of the screen                                                */
 export const Score = styled.div`
-  font-family: 'Gloria Hallelujah', cursive;
   position: absolute;
   bottom: 2vmin;
   left: 0;
@@ -181,6 +220,8 @@ export const Score = styled.div`
   text-align: center;
   color: #BDBDBD;
 `
+
+/* Wins: <span> element for styling the number of wins with it's team color   */
 export const Wins = styled.span`
   color: ${props => props.player == 'x' ? '#FF8F00' : '#4527A0'};
 `
