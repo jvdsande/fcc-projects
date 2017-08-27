@@ -30,9 +30,15 @@ import {
 /* Create an array of personal projects */
 const personalAchievements = [
   {
-    title: "React Pie Charts",
-    href: "piechart/"
-  }
+    title: "Amplitude (French)",
+    href: "http://amplitude.cc"
+  },
+  /* Not ready yet
+  {
+    title: "Enhanced Media Player",
+    href: "emp/"
+  },
+  */
 ]
 
 /* Create an array with each FreeCodeCamp project  */
@@ -126,7 +132,7 @@ export class Portfolio extends React.Component
         <p>
           Started coding at the age of 12 in Ruby, using the game development software <Link href="http://www.rpgmakerweb.com/products/programs/rpg-maker-xp">RPG Maker XP</Link>.
           Never stopped since, and taught myself how to use C++ and Java.
-          Then, at aged 18, joined a software engineering school were I learned C,
+          Then, at aged 18, joined a software engineering school where I learned C,
           which led me to embedded programming.
           Now full-time embedded engineer at <Link href="https://www.renesas.com/en-eu/">Renesas Electronics</Link>.
         </p>
@@ -171,7 +177,7 @@ export class Portfolio extends React.Component
         <ScrollableAnchor id='other_projects'>
           <h3>Other projects</h3>
         </ScrollableAnchor>
-        <p>Here are other open-source projects that I've been developing in my free time.</p>
+        <p>Here are other projects that I've been developing in my free time.</p>
         <Achievements>
           {
             /* Go through each personal project */
