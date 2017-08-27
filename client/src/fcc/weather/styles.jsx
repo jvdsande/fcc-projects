@@ -1,6 +1,16 @@
+/******************************************************************************/
+/* file: styles.jsx                                                           */
+/* author: Jeremie van der Sande                                              */
+/******************************************************************************/
+/* Styles for the Weather app                                                 */
+/******************************************************************************/
+
+/* 'styled-components' is used to keep the best of both the React and CSS
+ * worlds                                                                     */
 import styled, {injectGlobal} from 'styled-components'
 
 
+/* Theme the body to hold and center our weather card                         */
 injectGlobal`
   body {
     position: fixed;
@@ -15,7 +25,9 @@ injectGlobal`
   }
 `
 
-
+/* Background: <div> element dependent on the screen orientation, always showing
+               entirerly on screen, and with a max width and height. Its back
+               color depends on the time (day or night)                       */
 export const Background = styled.div`
   position: relative;
   background-color: ${props => props.time == 'day' ? '#B5DBFB' : '#040523'};
@@ -40,8 +52,6 @@ export const Background = styled.div`
   max-height: 480px;
 
   overflow: hidden;
-  background-size: cover;
-  background-image: url('./base-${props => props.time}.png');
   border-radius: 1vmin;
   box-shadow: 0 0 20px 10px #171717;
 `

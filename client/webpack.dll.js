@@ -1,7 +1,7 @@
 var webpack = require('webpack');
 var path = require('path');
 
-var BUILD_DIR = path.resolve(__dirname, '../public/dll');
+var BUILD_DIR = path.resolve(__dirname, '../docs/dll');
 var ROOT_DIR = path.resolve(__dirname, '');
 
 module.exports = {
