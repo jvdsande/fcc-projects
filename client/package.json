@@ -22,7 +22,6 @@
     "react": "^15.5.4",
     "react-dom": "^15.5.4",
     "react-scrollable-anchor": "^0.4.2",
-    "simple-get": "^2.6.0",
     "styled-components": "^1.4.5",
     "webpack": "^2.4.1"
   },
