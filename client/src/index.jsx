@@ -13,7 +13,7 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 
 /* Import the Portfolio component                                             */
-import {Portfolio} from './app'
+import {Portfolio} from './fcc/portfolio'
 
 
 /* The <div id='root'> element of our HTML will render our components         */

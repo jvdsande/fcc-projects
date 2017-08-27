@@ -9,9 +9,6 @@
 /* Import React as our main framework                                         */
 import React, {Component} from 'react'
 
-/* Import React DOM to inject our components                                  */
-import ReactDOM from 'react-dom'
-
 /* Import the custom styles from 'styles.jsx'.
  * 'styled-components' is used to keep the best of both the React and CSS
  * worlds                                                                     */

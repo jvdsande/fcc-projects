@@ -121,8 +121,14 @@ class Wikipedia extends Component {
         {/* Start with a title for the page                                   */}
         <Header>Wikipedia Viewer</Header>
 
-        {/* Then add our controlled input, focused at page load               */}
-        <SearchBox type='text' value={this.state.value} onChange={this.onChange} innerRef={(i) => {if(i) i.focus()}} />
+        {/* Then add our controlled input, focused at page load (except from
+            an iframe)                                                        */}
+        <SearchBox
+          type='text'
+          value={this.state.value}
+          onChange={this.onChange}
+          innerRef={(i) => {if(i && (window.self == window.top)) i.focus()}}
+        />
 
         <br />
 

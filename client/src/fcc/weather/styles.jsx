@@ -56,16 +56,19 @@ export const Background = styled.div`
   box-shadow: 0 0 20px 10px #171717;
 `
 
+/* Foreground: <div> element showing an image of a landscape, changing colors
+               between day and night                                          */
 export const Foreground = styled.div`
   display: inline-block;
   position: relative;
-  width: calc(100% + 4px);
-  height: calc(100% + 4px);
-  margin: -2px;
+  width: 100%;
+  height: 100%;
   background-size: cover;
   background-image: url('./base-${props => props.time}.png');
 `
 
+/* Panel: <div> element for displaying text above the background and foreground.
+          Use an opacity of 0.5 to leave the background picture apparent      */
 export const Panel = styled.div`
   background: black;
   font-family: sans-serif;
@@ -86,6 +89,8 @@ export const Panel = styled.div`
   font-size: 20px;
 `
 
+/* ErrorPanel: styled Panel used for displaying error. This specific Panel
+               covers entirerly the background image                          */
 export const ErrorPanel = styled(Panel)`
   top: 3vmin;
   left: 3vmin;
@@ -95,6 +100,7 @@ export const ErrorPanel = styled(Panel)`
 `
 
 
+/* City: <div> element for displaying the City name, with a large font        */
 export const City = styled.div`
   font-size: 140%;
   font-weight: bold;
@@ -102,16 +108,21 @@ export const City = styled.div`
   padding-right: 16px;
 `
 
+/* Type: <div> element for displaying the current weather type                */
 export const Type = styled.div`
   font-size: 110%;
 `
 
+/* Temp: <div> element for displaying the temperature. The text color changes to
+         reflect cold, average or hot temperature                             */
 export const Temp = styled.div`
   font-size: 220%;
   padding: 4px;
-  color: ${props => props.temp < 25 ? (props.temp < 10 ? '#0288D1' : '#00796B') : 'E64A19'};
+  color: ${props => props.temp < 26 ? (props.temp < 10 ? '#0288D1' : '#00796B') : 'E64A19'};
 `
 
+/* Unit: <span> element used for displaying the temperature unit. Use of cursor
+         to hint to the user that it is clickable                             */
 export const Unit = styled.span`
   cursor: pointer;
   font-weight: bold;
