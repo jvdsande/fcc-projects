@@ -226,6 +226,21 @@ export const LinkedIn = styled.a`
   display: inline-block;
   width: 32px;
   height: 32px;
+  margin-left: 16px;
   background-image: url("linkedin.png");
-  background-size: cover;
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+`
+
+/* GitHub: <a> element showing the GitHub logo                                */
+export const GitHub = styled(LinkedIn)`
+  background-image: url("github.png");
+`
+
+/* FreeCodeCamp: <a> element showing FreeCodeCamp logo                        */
+export const FreeCodeCamp = styled(LinkedIn)`
+  background-image: url("fcc.png");
+  width: 40px;
+  height: 32px;
 `

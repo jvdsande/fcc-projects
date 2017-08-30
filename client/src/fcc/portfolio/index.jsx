@@ -21,7 +21,7 @@ import {
   Nav, Section,
   Achievements, AchievementLink, AchievementHidden, AchievementTitle,
   Preview, NoClick,
-  LinkedIn,
+  LinkedIn, GitHub, FreeCodeCamp,
   Footer,
 } from './styles'
 
@@ -201,7 +201,8 @@ export class Portfolio extends React.Component
         {/* Add a footer with the link to my LinkedIn and GitHub accounts */}
         <Footer>
           <LinkedIn href="https://www.linkedin.com/in/jeremievds/" />
-          {/* <GitHub href="https://github.com/jvdsande/" /> */}
+          <GitHub href="https://github.com/jvdsande/" />
+          <FreeCodeCamp href="https://www.freecodecamp.com/jvdsande" />
         </Footer>
       </PortfolioBody>
     )
