@@ -137,10 +137,13 @@ export class Portfolio extends React.Component
           Now full-time embedded engineer at <Link href="https://www.renesas.com/en-eu/">Renesas Electronics</Link>.
         </p>
         <p>
-          During my embedded programming studies, I discovered Web programming which became my favorite pastime, and JavaScript quickly became my all-time favorite programming language. I used it for personal projects, and also succeeded to merge the embedded and JS worlds first through IoT projects, and then using <Link href="https://electron.atom.io">Electron</Link> for developping debugging tools.
+          During my embedded programming studies, I discovered Web programming which became my favorite pastime, and JavaScript quickly became my all-time favorite programming language.
+          I used it for personal projects, and also succeeded to merge the embedded and JS worlds first through IoT projects,
+          and then using <Link href="https://electron.atom.io">Electron</Link> for developping debugging tools.
         </p>
         <p>
-          I also invested in a small machine on which I run various servers for development, which helped me widen my Web knowledge to also include backend development, first using a classic LAMP server, and since a few months using Node.
+          I also invested in a small machine on which I run various servers for development, which helped me widen my Web knowledge to also include backend development,
+          first using a classic LAMP server, and since a few months using Node.
         </p>
         <hr />
         <p>
