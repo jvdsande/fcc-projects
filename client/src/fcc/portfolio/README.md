@@ -9,7 +9,7 @@ The live demo for the Portfolio is the root of this Github Page: [Portfolio](htt
 
 ### User Stories
 #### I can access all of the portfolio webpage's content just by scrolling.
-The Portfolio is built as a one pager, showing three linear sections. The user can scroll as on any static page all down to the bottom of the page. An empty space as also been added at the end of the page so that the content can scroll all the way up to the middle of the page, making for a better reading experience.
+The Portfolio is built as a one pager, showing three linear sections. The user can scroll as on any static page all down to the bottom of the page. An empty space has also been added at the end of the page so that the content can scroll all the way up to the middle of the page, making for a better reading experience.
 
 #### I can click different buttons that will take me to the portfolio creator's different social media pages.
 The final section includes three buttons, one linking to my [LinkedIn profile](https://linkedin.com/in/jeremievds), one to my [GitHub account](https://github.com/jvdsande), and one to my [FreeCodeCamp Account](https://www.freecodecamp.com/jvdsande).

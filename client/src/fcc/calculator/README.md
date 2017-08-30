@@ -15,4 +15,4 @@ It is possible to chain any number of operations, and the mathematical order of 
 The calculator features a DEL button used to clean the input field, and an AC function which will reset the calculator
 
 #### I can keep chaining mathematical operations together until I hit the equal button, and the calculator will tell me the correct output.
-The calculator can chain any number of signed number, integer and floating. It will then execute each operation, in the correct mathematical order. The output received from pressing "=" can then be fed to the next chain of operations, just by adding a new operator
+The calculator can chain any number of signed number, integer and floating. It will then execute each operation, in the correct mathematical order. The output received from pressing "=" can then be fed to the next chain of operations, just by adding a new operator.

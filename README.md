@@ -11,14 +11,14 @@ The build output is located in the `docs/` folder, used as root of the [Github P
 ### Source code
 All source code is readable from the `client/src/` folder. This folder contains a `fcc/` subfolder where each project can be found.
 React is used for all the projects, and the file organization is always the same:
-- The root of the project can be found in `fcc/[project]/index.js`
-- All other components are defined in their own `[component]/` subfolder, with their entry point in `[component]/index.js`
-- All styling is done with in-code CSS using [styled-components](https://www.styled-components.com/), and is situated in `styles.jsx` file next to the `index.js` file that uses it.
+- The root of the project can be found in `fcc/[project]/index.jsx`
+- All other components are defined in their own `[component]/` subfolder, with their entry point in `[component]/index.jsx`
+- All styling is done with in-code CSS using [styled-components](https://www.styled-components.com/), and is situated in a `styles.jsx` file next to the `index.jsx` file that uses it.
 
 A custom README.md is also available for each independent project.
 
 ### Live demo
-The live demo of the projects can be loaded from [here](http://jvdsande.github.io/fcc-projects/), hosted by Github, or through my [self-hosted development website](http://jeremie-vds.com/). The Github version offers a through HTTPS experience required for at least the Weather project.
+The live demo of the projects can be loaded from [here](http://jvdsande.github.io/fcc-projects/), hosted by Github, or through my [self-hosted development website](http://jeremie-vds.com/). The Github version offers a true HTTPS experience required for at least the Weather project.
 
 ### Project repository list
 - [Calculator](https://github.com/jvdsande/fcc-projects/tree/master/client/src/fcc/calculator)

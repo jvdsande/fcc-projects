@@ -46,6 +46,7 @@ injectGlobal `
 /* Link: styled <a> element removing underline and tweaking the color.        */
 export const Link = styled.a`
   text-decoration: none;
+  outline: none;
   color: #1976D2;
   position: relative;
 
@@ -88,12 +89,28 @@ export const Nav = styled.div`
 /* Section: <a> element for the navigation bar. Text written sideways.
  *          Inherits the styling of the Link element                          */
 export const Section = styled(Link)`
+
+  /* Clean way that works on Chrome/IE but not Firefox due to bug with
+   * flexbox and vertical mode                                                */
+  /*
   flex: 1;
-  writing-mode: tb-rl;
+  writing-mode: vertical-rl;
   transform: rotate(180deg);
+  */
+  /* End of clean way                                                         */
+
+  /* Hack to make it cross-browser */
+  height: 64px;
+  width: 33.33vh;
+  transform: rotate(-90deg) translateX(-16.66vh) translateY(32px);
+  transform-origin: 0 32px;
+  /* End of hack */
+
   background: #009688;
   display: flex;
   justify-content: space-around;
+  align-content: center;
+  align-items: center;
   flex-direction: column;
   font-weight: bold;
   text-transform: uppercase;

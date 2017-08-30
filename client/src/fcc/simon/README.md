@@ -4,7 +4,7 @@
 
 The Simon Game project was built on the same design as the Tic Tac Toe game. The design is based on clear, bright colors and handwriting-like font.
 
-The game present's a classic four-color wheel, with game state and options available in the center of the wheel.
+The game presents a classic four-color wheel, with game state and options available in the center of the wheel.
 
 The live demo can be accessed here: [Simon Game](http://jvdsande.github.io/fcc-projects/fcc/simon)
 

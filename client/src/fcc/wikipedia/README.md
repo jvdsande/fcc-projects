@@ -4,7 +4,7 @@
 
 This project uses a flex-box grid to display a list of material-design inspired cards of Wikipedia entries.
 Each card shows a small extract of the article, and a link to open the full article in its own page.
-Each line of card text the height of the biggest card in the line.
+Each line of card takes the height of the biggest card in the line.
 
 The live demo can be accessed here: [Wikipedia Viewer](http://jvdsande.github.io/fcc-projects/fcc/wikipedia)
 

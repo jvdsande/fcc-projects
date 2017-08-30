@@ -106,15 +106,9 @@ export class Portfolio extends React.Component
       <PortfolioBody>
         {/* Create the navigation sidebar */}
         <Nav>
-          <Section href="#about_me">
-            About Me
-          </Section>
-          <Section href="#fcc_projects">
-            FreeCodeCamp Projects
-          </Section>
-          <Section href="#other_projects">
-            Personal Projects
-          </Section>
+          <Section href="#about_me">About Me</Section>
+          <Section href="#fcc_projects">FreeCodeCamp Projects</Section>
+          <Section href="#other_projects">Personal Projects</Section>
         </Nav>
 
 
