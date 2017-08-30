@@ -12,7 +12,7 @@ The build output is located in the `docs/` folder, used as root of the [Github P
 All source code is readable from the `client/src/` folder. This folder contains a `fcc/` subfolder where each project can be found.
 React is used for all the projects, and the file organization is always the same:
 - The root of the project can be found in `fcc/[project]/index.js`
-- All other components are defined in their own `[component]/` subfolder, with their entry point in '[component]/index.js'
+- All other components are defined in their own `[component]/` subfolder, with their entry point in `[component]/index.js`
 - All style is done in in-code CSS using [styled-components](https://www.styled-components.com/), and or situated in a `styles.jsx` file next to the `index.js` file that uses them.
 
 A custom README.md is also available for each independent project.
